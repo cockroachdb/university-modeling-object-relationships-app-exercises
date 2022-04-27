@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install CockroachDB
+        run: curl https://binaries.cockroachdb.com/cockroach-v21.2.6.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v21.2.6.linux-amd64/cockroach /usr/local/bin/
+      - name: Install Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install pytz
+          pip install docopt
+          pip install psycopg2-binary
+      - name: Run the build
+        run: ./build.sh verify
+
+
