@@ -1,0 +1,2 @@
+ALTER TABLE movr_vehicles.maintenance_history DROP CONSTRAINT vehicle_fk;
+ALTER TABLE movr_vehicles.maintenance_history ADD CONSTRAINT vehicle_fk FOREIGN KEY (vehicle_id) REFERENCES movr_vehicles.vehicles(id) ON DELETE CASCADE;

@@ -1,0 +1,38 @@
+### Mac ###
+.DS_Store
+
+### Java ###
+target/
+
+### certs & keys ###
+*.crt
+*.pem
+*.key
+ssl
+
+### Editors ###
+.*.swp
+.idea
+*.iws
+*.iml
+*.ipr
+*.sublime-project
+*.sublime-workspace
+.vscode
+
+### Shell Scripts ###
+db-setup.log
+
+### NodeJS ###
+build/
+node_modules
+
+### CockroachDB ###
+inflight_trace_dump
+
+### Python ###
+.pytest_cache
+.mypy_cache
+inflight_trace_dump
+__pycache__
+.pyc
