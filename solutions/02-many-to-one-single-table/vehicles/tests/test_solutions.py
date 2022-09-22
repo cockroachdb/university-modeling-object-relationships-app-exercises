@@ -317,33 +317,6 @@ class TestClass:
             elif mileage > maintenance_frequency:
                 assert last_maintenance == maintenance_frequency
 
-    def test_update_maintenance_frequency(
-            self, crdb, db="movr_vehicles", table="vehicles",
-            setup_scripts=['load_initial_state.sql', 'add_columns.sql',
-                           'set_maintenance_frequency.sql',
-                           'update_mileage.sql',
-                           'update_last_maintenance.sql'],
-            query_file='update_maintenance_frequency.sql'):
-        """
-        """
-        # setup
-        set_up_db_and_table(crdb.connection, db=db, table=table)
-        for script in setup_scripts:
-            run_sql_script(conn=crdb.connection, script_name=script)
-        
-        # action
-        run_sql_script(conn=crdb.connection, script_name=query_file)
-
-        # assert
-        vehicle_records = select_star(crdb.connection)
-        dirt_devilz_found = 0
-        for record in vehicle_records:
-            if record['make'] == 'Dirt Devilz':
-                dirt_devilz_found += 1
-                assert record['maintenance_frequency'] == 200
-        assert dirt_devilz_found >= 2
-
-
 def main():
     opts = docopt(__doc__)
 
